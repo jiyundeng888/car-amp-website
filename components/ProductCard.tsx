@@ -1,40 +1,55 @@
-type ProductCardProps = {
+export default function ProductCard({
+  name,
+  category,
+  power,
+  channels,
+  classLabel,
+  description,
+  specs,
+}: {
   name: string;
   category: string;
   power: string;
   channels: string;
+  classLabel: string;
   description: string;
-  highlights: string[];
-};
-
-export default function ProductCard({ name, category, power, channels, description, highlights }: ProductCardProps) {
+  specs: { label: string; value: string }[];
+}) {
   return (
-    <article className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-panel transition hover:-translate-y-1 hover:border-signal/50">
-      <div className="relative min-h-56 bg-metal-line p-6">
-        <div className="absolute inset-0 grid-mask opacity-60" />
-        <div className="relative flex h-44 flex-col justify-between rounded-2xl border border-white/10 bg-black/50 p-6">
-          <div className="flex items-center justify-between text-xs font-black uppercase tracking-[0.22em] text-slate-400">
-            <span>{category}</span>
-            <span>{channels}</span>
-          </div>
-          <div>
-            <div className="mb-4 h-2 w-28 rounded-full bg-signal shadow-glow" />
-            <h3 className="text-2xl font-black tracking-[-0.03em] text-white">{name}</h3>
-            <p className="mt-1 text-sm font-bold uppercase tracking-[0.2em] text-copper">{power}</p>
-          </div>
-        </div>
+    <div className="group flex flex-col rounded-3xl border border-white/10 bg-graphite/50 p-6 transition hover:border-signal/30 hover:bg-graphite">
+      {/* Product visual */}
+      <div className="mb-5 flex aspect-[4/3] items-center justify-center rounded-2xl border border-white/5 bg-gradient-to-br from-asphalt to-graphite-light">
+        <span className="text-3xl font-black tracking-tight text-white/10 transition group-hover:text-signal/30">
+          {name.split("-")[0]}
+        </span>
       </div>
-      <div className="p-7">
-        <p className="mb-6 text-sm leading-7 text-slate-400">{description}</p>
-        <div className="grid gap-3">
-          {highlights.map((item) => (
-            <div key={item} className="flex items-center gap-3 text-sm text-slate-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-signal" />
-              {item}
-            </div>
-          ))}
-        </div>
+
+      <p className="text-xs font-black uppercase tracking-wider text-signal">
+        {category}
+      </p>
+      <h3 className="mt-2 text-xl font-black text-white">{name}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-400">{description}</p>
+
+      <div className="mt-5 grid grid-cols-2 gap-3">
+        {specs.map((spec) => (
+          <div
+            key={spec.label}
+            className="rounded-xl border border-white/5 bg-black/30 px-3 py-2.5"
+          >
+            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+              {spec.label}
+            </p>
+            <p className="mt-1 text-sm font-black text-white">{spec.value}</p>
+          </div>
+        ))}
       </div>
-    </article>
+
+      <div className="mt-5 flex items-center gap-3 border-t border-white/5 pt-4">
+        <span className="rounded-lg bg-signal/10 px-3 py-1 text-xs font-bold text-signal">
+          {power}
+        </span>
+        <span className="text-xs text-slate-500">{channels} &middot; {classLabel}</span>
+      </div>
+    </div>
   );
 }

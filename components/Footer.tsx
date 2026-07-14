@@ -1,38 +1,65 @@
-import Link from 'next/link';
+import Link from "next/link";
+
+const footerLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/products", label: "Products" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black/40">
-      <div className="container-xl grid gap-10 py-14 md:grid-cols-[1.4fr_.8fr_.8fr]">
-        <div>
-          <div className="mb-5 flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-signal font-black text-white">VE</span>
-            <span className="text-sm font-black uppercase tracking-[0.32em]">VoltEdge Audio</span>
+    <footer className="border-t border-white/5 bg-asphalt">
+      <div className="container-xl py-16">
+        <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
+          <div>
+            <span className="text-lg font-black tracking-tight text-white">
+              VOLT<span className="text-signal">EDGE</span>
+            </span>
+            <p className="mt-4 max-w-xs text-sm leading-7 text-slate-500">
+              Premium car amplifier manufacturer and exporter. OEM/ODM, private
+              label, and wholesale programs for the US 12V aftermarket.
+            </p>
           </div>
-          <p className="max-w-xl text-sm leading-7 text-slate-400">
-            Premium car amplifier systems for U.S. distributors, custom installers, and private-label mobile audio brands.
+
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-signal">
+              Navigate
+            </p>
+            <ul className="mt-5 space-y-3">
+              {footerLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-slate-400 transition hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-signal">
+              Contact
+            </p>
+            <ul className="mt-5 space-y-3 text-sm text-slate-400">
+              <li>sales@voltedge-audio.com</li>
+              <li>Shenzhen, China</li>
+              <li>Markets: US, Canada, Mexico, LATAM</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
+          <p className="text-xs text-slate-600">
+            &copy; {new Date().getFullYear()} VoltEdge Audio. All rights reserved.
+          </p>
+          <p className="text-xs text-slate-600">
+            Designed for the US 12V aftermarket.
           </p>
         </div>
-        <div>
-          <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-white">Pages</h3>
-          <div className="grid gap-3 text-sm text-slate-400">
-            <Link href="/" className="hover:text-white">Home</Link>
-            <Link href="/about/" className="hover:text-white">About Us</Link>
-            <Link href="/products/" className="hover:text-white">Products</Link>
-            <Link href="/contact/" className="hover:text-white">Contact</Link>
-          </div>
-        </div>
-        <div>
-          <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-white">Markets</h3>
-          <div className="grid gap-3 text-sm text-slate-400">
-            <span>12V Car Audio</span>
-            <span>OEM / ODM Supply</span>
-            <span>Dealer Programs</span>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-white/10 py-6 text-center text-xs uppercase tracking-[0.2em] text-slate-500">
-        © 2026 VoltEdge Audio. Built for static Cloudflare Pages deployment.
       </div>
     </footer>
   );
